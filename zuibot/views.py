@@ -11,8 +11,9 @@ def index(request):
 
 class ZuiBotView(generic.View):
     def get(self, request, *args, **kwargs):
-        if self.request.GET['hub.verify_token'] == '61581898':
-            return HttpResponse(self.request.GET['hub.challenge'])
+        # return HttpResponse("Hello World!")
+        if request.GET['hub.verify_token'] == '61581898':
+            return HttpResponse(request.GET['hub.challenge'])
         else:
             return HttpResponse('Error, invalid token')
 
@@ -23,7 +24,7 @@ class ZuiBotView(generic.View):
     # Post function to handle Facebook messages
     def post(self, request, *args, **kwargs):
         # Converts the text payload into a python dictionary
-        incoming_message = json.loads(self.request.body.decode('utf-8'))
+        incoming_message = json.loads(request.body.decode('utf-8'))
         # Facebook recommends going through every entry since they might send
         # multiple messages in a single call during high load
         for entry in incoming_message['entry']:

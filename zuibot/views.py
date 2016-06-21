@@ -11,7 +11,7 @@ def index(request):
 
 class ZuiBotView(generic.View):
     def get(self, request, *args, **kwargs):
-        if self.request.GET['hub.verify_token'] == '2318934571':
+        if self.request.GET['hub.verify_token'] == '61581898':
             return HttpResponse(self.request.GET['hub.challenge'])
         else:
             return HttpResponseForbidden()

@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+import zuibot.views
 
 urlpatterns = [
-    url(r'^$', ),
+    url(r'^$', zuibot.views.index),
     url(r'^admin/', admin.site.urls),
 ]

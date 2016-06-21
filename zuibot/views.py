@@ -14,7 +14,7 @@ class ZuiBotView(generic.View):
         if self.request.GET['hub.verify_token'] == '61581898':
             return HttpResponse(self.request.GET['hub.challenge'])
         else:
-            return HttpResponseForbidden()
+            return HttpResponse('Error, invalid token')
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):

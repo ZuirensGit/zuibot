@@ -1,2 +1,2 @@
-web: gunicorn appsite.wsgi --log-file -
+web: gunicorn zuibot.wsgi --log-file -
 

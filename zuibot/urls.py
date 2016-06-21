@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-import zuibot.views
+from zuibot.views import index, ZuiBotView
 
 urlpatterns = [
-    url(r'^$', zuibot.views.index),
+    url(r'^$', index),
     url(r'^admin/', admin.site.urls),
+    url(r'^chatwithme/$', ZuiBotView.as_view()),
 ]

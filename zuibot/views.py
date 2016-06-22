@@ -13,18 +13,18 @@ class ZuiBotView(generic.View):
 
     def get(self, request, *args, **kwargs):
         # return HttpResponse('What the fuck')
-        return HttpResponse("Hello World!")
-        # if request.GET['hub.verify_token'] == '61581898':
-        #     # pprint('what the ???')
-        #     return HttpResponse(request.GET['hub.challenge'])
-        #
-        # else:
-        #     # pprint('what the fuck')
-        #     return HttpResponse('Error, invalid token')
+        # return HttpResponse("Hello World!")
+        if request.GET['hub.verify_token'] == '61581898':
+            # pprint('what the ???')
+            return HttpResponse(request.GET['hub.challenge'])
 
-    # @method_decorator(csrf_exempt)
-    # def dispatch(self, request, *args, **kwargs):
-    #     return generic.View.dispatch(self, request, *args, **kwargs)
+        else:
+            # pprint('what the fuck')
+            return HttpResponseForbidden()
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return generic.View.dispatch(self, request, *args, **kwargs)
 
     # Post function to handle Facebook messages
     def post(self, request, *args, **kwargs):

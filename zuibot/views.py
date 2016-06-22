@@ -49,4 +49,4 @@ def post_facebook_message(fbid, recevied_message):
     pprint(status.json())
 
 def test(request):
-    return HttpResponse("Just for test")
+    return HttpResponse("Just for test2")

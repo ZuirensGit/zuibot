@@ -22,9 +22,9 @@ class ZuiBotView(generic.View):
         #     # pprint('what the fuck')
         #     return HttpResponse('Error, invalid token')
 
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return generic.View.dispatch(self, request, *args, **kwargs)
+    # @method_decorator(csrf_exempt)
+    # def dispatch(self, request, *args, **kwargs):
+    #     return generic.View.dispatch(self, request, *args, **kwargs)
 
     # Post function to handle Facebook messages
     def post(self, request, *args, **kwargs):

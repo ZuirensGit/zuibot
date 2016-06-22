@@ -20,5 +20,5 @@ from zuibot.views import index, ZuiBotView, test
 urlpatterns = [
     url(r'^$', index),
     url(r'^admin/', admin.site.urls),
-    url(r'^chatwithme/$', test),
+    url(r'^chatwithme/$', ZuiBotView.as_view()),
 ]

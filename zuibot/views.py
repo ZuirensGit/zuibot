@@ -1,13 +1,19 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views import generic
 from django.http import HttpResponse, HttpResponseForbidden
 import json, requests
+from random import random
 from pprint import pprint
 
 PAGE_ACCESS_TOKEN = 'EAAPtuD3EFgoBAEkFrpxJ0iSvQr3G186xEz13GHu3uqgZAZAJdFKdCkOOKjJ8xFFA6gDsq2TLQpJqJmmRp8sZAlS4HflkuXgEbxau0yhUOxNwz6hB3lBLAf5yRywSg7vPR7k9XHNFCk3m8Vzu4n1XJLXSU7mZABGhGZAR7PgNI9E7NNH3ruy93'
 VERIFY_TOKEN = '61581898'
+
+bark = u'汪'
+
 def index(request):
     return render(request, 'index.html', locals())
 
@@ -46,7 +52,21 @@ class ZuiBotView(generic.View):
 
 def post_facebook_message(fbid, recevied_message):
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=' + PAGE_ACCESS_TOKEN
-    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":recevied_message}})
+    n = len(recevied_message) >> 1
+    if n < 2: n = 2
+    maxl = round(random() * 10)
+    msg = ''
+    for i in range(n):
+        msg += (bark * int(round(random() * maxl)) + ' ')
+    msg = msg[:-1]
+    if random() >= 0.5: msg += '!'
+    elif random() >= 0.5: msg += '?'
+    elif random() >= 0.5: msg += '~'
+    if random() >= 0.5: msg += ';)'
+
+
+    response_msg = json.dumps({"recipient":{"id":fbid},
+                               "message":{"text":msg}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     pprint(status.json())
 

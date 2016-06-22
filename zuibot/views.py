@@ -13,14 +13,14 @@ class ZuiBotView(generic.View):
 
     def get(self, request, *args, **kwargs):
         # return HttpResponse('What the fuck')
-        # return HttpResponse("Hello World!")
-        if request.GET['hub.verify_token'] == '61581898':
-            # pprint('what the ???')
-            return HttpResponse(request.GET['hub.challenge'])
-
-        else:
-            # pprint('what the fuck')
-            return HttpResponse('Error, invalid token')
+        return HttpResponse("Hello World!")
+        # if request.GET['hub.verify_token'] == '61581898':
+        #     # pprint('what the ???')
+        #     return HttpResponse(request.GET['hub.challenge'])
+        #
+        # else:
+        #     # pprint('what the fuck')
+        #     return HttpResponse('Error, invalid token')
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):

@@ -6,6 +6,8 @@ from django.http import HttpResponse, HttpResponseForbidden
 import json, requests
 from pprint import pprint
 
+PAGE_ACCESS_TOKEN = 'EAAPtuD3EFgoBAEkFrpxJ0iSvQr3G186xEz13GHu3uqgZAZAJdFKdCkOOKjJ8xFFA6gDsq2TLQpJqJmmRp8sZAlS4HflkuXgEbxau0yhUOxNwz6hB3lBLAf5yRywSg7vPR7k9XHNFCk3m8Vzu4n1XJLXSU7mZABGhGZAR7PgNI9E7NNH3ruy93'
+VERIFY_TOKEN = '61581898'
 def index(request):
     return render(request, 'index.html', locals())
 
@@ -14,7 +16,7 @@ class ZuiBotView(generic.View):
     def get(self, request, *args, **kwargs):
         # return HttpResponse('What the fuck')
         # return HttpResponse("Hello World!")
-        if request.GET['hub.verify_token'] == '61581898':
+        if request.GET['hub.verify_token'] == VERIFY_TOKEN:
             # pprint('what the ???')
             return HttpResponse(request.GET['hub.challenge'])
 
@@ -43,10 +45,10 @@ class ZuiBotView(generic.View):
         return HttpResponse()
 
 def post_facebook_message(fbid, recevied_message):
-    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=<page-access-token>'
+    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=' + PAGE_ACCESS_TOKEN
     response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":recevied_message}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     pprint(status.json())
 
 def test(request):
-    return HttpResponse("Just for test2")
+    return HttpResponse("Just for test")
